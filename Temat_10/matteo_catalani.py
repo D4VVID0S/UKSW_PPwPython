@@ -1,38 +1,43 @@
 import numpy as np
 
-# Tworzenie tablicy a o wymiarach (3, 4, 8)
-a = np.array([[[3, 2, 2, 7, 7, 7, 0, 3],
-               [5, 8, 4, 2, 9, 9, 3, 9],
-               [6, 8, 2, 8, 5, 7, 8, 7],
-               [5, 2, 4, 0, 4, 9, 2, 5]],
+# Wymiary tablicy
+K = 3 # Wymiar
+J = 4 # Wiersze
+I = 8 # Kolumny
 
-              [[4, 3, 1, 8, 2, 5, 2, 0],
-               [9, 1, 5, 8, 8, 5, 6, 5],
-               [3, 2, 2, 0, 1, 5, 6, 1],
-               [5, 1, 9, 4, 2, 6, 9, 2]],
+# Utworzenie pustej tablicy o wymiaracj (K, J, I)
+a = np.zeros((K, J, I), dtype=int)
 
-              [[4, 6, 6, 3, 8, 6, 8, 8],
-               [3, 9, 2, 6, 3, 3, 1, 0],
-               [5, 4, 0, 6, 0, 2, 7, 8],
-               [6, 3, 1, 8, 8, 1, 5, 7]]])
+# Wypełnienie tablicy losowymi liczbami całkowitymi od 0 do 9
+a = np.random.randint(0, 10, size=(K, J, I))
 
-print("Originalna tablica:")
-print(a)
-print("\nKształt:", a.shape)
+while True:
+    try:        
+        # Wczytanie tablicy tidx od użytkownika
+        tidx_str = input("Podaj indeksy dla tidx oddzielone spacjami: ")
+        tidx = [int(idx) for idx in tidx_str.split()]
 
-# Wczytanie tablicy tidx od użytkownika
-tidx_str = input("Podaj indeksy dla tidx oddzielone spacjami: ")
-tidx = [int(idx) for idx in tidx_str.split()]
+        # Sprawdzenie poprawności danych
+        if len(tidx) != J:
+            raise ValueError("Niepoprawna liczba indeksów. Podaj dokładnie 4 indeksy.")
+        if not all(0 <= idx < K for idx in tidx):
+            raise ValueError("Niepoprawny indeks. Indeksy muszą być liczbami całkowitymi od 0 do", K-1)
+
+        # Wyście z pętli, jeśli dane są poprawne
+        break
+
+    except ValueError as e:
+        print("Błąd:", str(e))
+        print("Spróbuj ponownie.")
+
+print("Originalna tablica:\n", a)
+# print("\nKształt:", a.shape)
+
+tablica_wybranych_wierszy = np.zeros((K, J, I), dtype=int)
+
+for idx in tidx:
+    tablica_wybranych_wierszy = a[tidx,idx,:]
 
 
-wybrane_wiersze = a[:tidx:1]
 
-
-
-# # Wybór danych z pierwszego wymiaru (K) na podstawie tidx
-# selected_data = a[:, tidx, :]
-
-# # Wypisanie wybranej tablicy
-# print("\nWybrana tablica:")
-# print(selected_data)
-# print("\nKształt:", selected_data.shape)
+print("\nTablica wybranych wierszy:\n", tablica_wybranych_wierszy)
