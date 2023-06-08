@@ -29,8 +29,10 @@ print("Originalna tablica:\n", a)
 print("\nKształt:", a.shape)
 
 tablica_wybranych_wierszy = np.random.randint(0, 10, size=(J, I))
-for i in range(4):
-    tablica_wybranych_wierszy[i, :] = a[: ,tidx, :]
+
+for i, wartosc in enumerate(tidx):
+    tablica_wybranych_wierszy[i] = a[wartosc][i] # Syntax Pythona (OG)
+    # tablica_wybranych_wierszy[i] = a[wartosc, i] # Specyficzny syntax dla NumPy
 
 print("\nTablica wybranych wierszy:\n", tablica_wybranych_wierszy)
 print("\n", "Rozmiar tablicy wybranych wierszy:", tablica_wybranych_wierszy.shape, "\n")
