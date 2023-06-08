@@ -1,14 +1,9 @@
 import numpy as np
 
-# Wymiary tablicy
-K = 3 # Wymiar
+K = 3 # Wymiary
 J = 4 # Wiersze
 I = 8 # Kolumny
 
-# Utworzenie pustej tablicy o wymiaracj (K, J, I)
-a = np.zeros((K, J, I), dtype=int)
-
-# Wypełnienie tablicy losowymi liczbami całkowitymi od 0 do 9
 a = np.random.randint(0, 10, size=(K, J, I))
 
 while True:
@@ -31,13 +26,11 @@ while True:
         print("Spróbuj ponownie.")
 
 print("Originalna tablica:\n", a)
-# print("\nKształt:", a.shape)
+print("\nKształt:", a.shape)
 
-tablica_wybranych_wierszy = np.zeros((K, J, I), dtype=int)
-
-for idx in tidx:
-    tablica_wybranych_wierszy = a[tidx,idx,:]
-
-
+tablica_wybranych_wierszy = np.random.randint(0, 10, size=(J, I))
+for i in range(4):
+    tablica_wybranych_wierszy[i, :] = a[: ,tidx, :]
 
 print("\nTablica wybranych wierszy:\n", tablica_wybranych_wierszy)
+print("\n", "Rozmiar tablicy wybranych wierszy:", tablica_wybranych_wierszy.shape, "\n")
