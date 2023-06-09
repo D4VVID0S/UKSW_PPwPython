@@ -28,24 +28,24 @@ s2 = np.sin(4*np.pi*t)
 # Create figure 1
 
 plt.figure(1)
-plt.subplot(211)
+plt.subplot(2,1,1)
 plt.plot(t, s1)
-plt.subplot(212)
+plt.subplot(2,1,2)
 plt.plot(t, 2*s1)
 
 ###############################################################################
 # Create figure 2
 
 plt.figure(2)
-plt.plot(t, s2)
+plt.plot(t, s2, '^') # '^' triangle up marker
 fig2=plt.gcf() # get current figure gives access to figure 2
 anotherfig2=fig2
 ###############################################################################
 # Now switch back to figure 1 and make some changes
 
 plt.figure(1)
-plt.subplot(211)
-plt.plot(t, s2, 's')
+plt.subplot(2,1,1)
+plt.plot(t, s2, 's') # 's' square marker
 ax = plt.gca()
 ax.set_xticklabels([])
 
