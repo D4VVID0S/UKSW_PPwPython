@@ -14,9 +14,9 @@ x = np.array([1,-1,1,1,-1,1,1,1,1,1,1,-1,1,1,-1,-1,-1,-1,-1,-1,1,1,1,-1,1])
 print(x.reshape(L,L))
 pattern = []
 pattern.append(np.array([-1,1,1,1,-1,1,-1,-1,-1,1,1,1,1,1,1,1,-1,-1,-1,1,1,-1,-1,-1,1])) # A
-#print(pattern[-1].reshape(L,L))
+# print(pattern[-1].reshape(L,L))
 pattern.append(np.array([1,1,1,1,1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,1,1,1,1,1])) # Z
-#print(pattern[-1].reshape(L,L))
+# print(pattern[-1].reshape(L,L))
 # etap uczenia
 for mu in range(n):
 	w += np.outer(pattern[mu],pattern[mu])-one
