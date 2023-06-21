@@ -26,9 +26,10 @@ def load_result_file():
         overwrite = input("Plik z wynikami już istnieje. Czy chcesz go nadpisać? (T/N): ")
         if overwrite.lower() == "t":
             os.remove(result_file_path)
+            print(f"Utworzono nowy plik wynikowy: {result_file_name}")
+
         else:
             print("Anulowano zapis wyników.")
-            return None
 
     # Tworzenie nowego pliku wynikowego
     with open(result_file_path, 'w') as result_file:
@@ -45,7 +46,7 @@ def calculate_pixel_statistics(image):
     total_pixels = 0
 
     for pixel in image.getdata():
-        r, g, b = pixel[:3]  # We extract only the RGB values
+        r, g, b = pixel[:3]
         max_value = max(r, g, b)
         
         if r == g == b:
@@ -62,19 +63,6 @@ def calculate_pixel_statistics(image):
     return red_pixels, green_pixels, blue_pixels, gray_pixels, total_pixels
 
 
-def write_pixel_image_data(result_file_path, image_name, red_pixels, green_pixels, blue_pixels, gray_pixels, total_pixels):
-    # Zapisanie statystyk do pliku wynikowego
-    with open(result_file_path, 'a') as result_file:
-        result_file.write(f"Nazwa pliku obrazka: {image_name}\n")
-        result_file.write(f"Liczba czerwonych pikseli: {red_pixels}\n")
-        result_file.write(f"Liczba zielonych pikseli: {green_pixels}\n")
-        result_file.write(f"Liczba niebieskich pikseli: {blue_pixels}\n")
-        result_file.write(f"Liczba szarych pikseli: {gray_pixels}\n")
-        result_file.write(f"Łączna liczba pikseli: {total_pixels}\n")
-
-    print("Statystyki obrazka zostały zapisane poprawnie!")
-
-
 def show_pie_chart(red_pixels, green_pixels, blue_pixels, gray_pixels):
     # Wykres kołowy z procentowym udziałem kolorów
     labels = ['Czerwony', 'Zielony', 'Niebieski', 'Szary']
@@ -86,6 +74,19 @@ def show_pie_chart(red_pixels, green_pixels, blue_pixels, gray_pixels):
     ax.set_title("Procentowy udział kolorów pikseli")
     ax.axis('equal')
     plt.show()
+
+
+def write_pixel_image_data(result_file_path, image_name, red_pixels, green_pixels, blue_pixels, gray_pixels, total_pixels):
+    # Zapisanie statystyk do pliku wynikowego
+    with open(result_file_path, 'a') as result_file:
+        result_file.write(f"Nazwa pliku obrazka: {image_name}\n")
+        result_file.write(f"Liczba czerwonych pikseli: {red_pixels}\n")
+        result_file.write(f"Liczba zielonych pikseli: {green_pixels}\n")
+        result_file.write(f"Liczba niebieskich pikseli: {blue_pixels}\n")
+        result_file.write(f"Liczba szarych pikseli: {gray_pixels}\n")
+        result_file.write(f"Łączna liczba pikseli: {total_pixels}\n")
+
+    print("Statystyki obrazka zostały zapisane poprawnie!")
 
 
 def main():
@@ -100,9 +101,6 @@ def main():
 
     # Wczytanie pliku wynikowego
     result_file_path = load_result_file()
-
-    if result_file_path is None:
-        exit()
 
     # Wczytanie obrazka
     try:
